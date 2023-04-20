@@ -1,0 +1,36 @@
+.board1 {
+  right: auto;
+  width: 500px;
+  height: 300px;
+  border-style: solid;
+  border-width: thin;
+  border: 2px solid #555C3C;
+  display: flex;
+  flex-direction: column;
+  background-color: #c4cfa2;
+}
+.board2{
+  border: 15px solid #8B966E;  
+  border-radius: 5px;
+}
+.board3{
+  border: 8px solid #B0BB92;  
+  border-radius: 15px;
+}
+.board4{
+  border: 10px solid #545B41;  
+  border-radius: 25px;
+}
+.row {
+  display: flex;
+}
+.empty {
+  width: 20px;
+  height: 10px;
+  font-size: 6px;
+}
+.filled {
+  background-color:  red;
+  width: 20px;
+  height: 10px;
+}
