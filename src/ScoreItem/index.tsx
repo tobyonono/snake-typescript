@@ -1,18 +1,19 @@
 import React from "react";
-import './score.css'
+import './scoreItem.css'
+import * as Utils from '../utils'
 
 interface Props {
   description:string
-  value: string;
+  value: number;
   children: React.ReactNode | undefined;
 }
 
 const ScoreItem = ({description, value, children}:Props) => {
-  return <>
+  return <div className="scoreRegion" >
     {children}
     <span className="score">
-      {description}{value}
+      {description}{ Utils.formatScore(value)}
     </span>  
-  </>
+  </div>
 }
 export default ScoreItem;

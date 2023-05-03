@@ -1,11 +1,17 @@
+.scoreRegion {
+  display: flex;
+  align-items: center;
+}
+
 .score {
+  align-items: center;
   font-family: 'Press Start 2P';
   color: #C4CFA2;
   font-size: 20px;
-  padding: .2em .5em;
 }
 
-svg {
+div > svg {
   margin-left: 1em;
+  margin-right: .4em;
   color:#C4CFA2;
 }

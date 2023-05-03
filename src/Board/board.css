@@ -1,7 +1,7 @@
 .board1 {
   right: auto;
   width: 500px;
-  height: 300px;
+  /* height: 300px; */
   border-style: solid;
   border-width: thin;
   border: 2px solid #555C3C;
@@ -31,6 +31,6 @@
 }
 .filled {
   background-color:  red;
-  width: 20px;
-  height: 10px;
+  width: 40px;
+  height: 0px;
 }

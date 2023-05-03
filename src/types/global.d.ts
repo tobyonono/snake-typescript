@@ -6,7 +6,8 @@ declare global {
   const ROWS:number = 20
   
   interface IMaxScore {
-    value:number;
+    id:string
+    value:number
     nickName:string
   }
 
@@ -21,7 +22,7 @@ declare global {
   }
   
   interface ISnake {
-    endGame:boolean
+    phase: 0|1|2|3;
     cells: ICoordinate[]
     fruit: ICoordinate
     idTimer:number

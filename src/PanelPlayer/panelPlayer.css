@@ -1,0 +1,73 @@
+.panelPlayer {
+  position: absolute;
+  margin: 2.3em 1.5em;
+  width: 450px;
+  height: 150px;
+  background-color: #414141;
+  border-radius: 5px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label, input {
+  display: block;
+}
+
+label {
+  width: 60%;
+}
+
+input {
+  font-family:  'Press Start 2P';
+  margin-right: .2em;
+  font-size: 18px;
+  text-align: center;
+  width: 45%;
+  height: 37px;
+  border: 5px solid #c4cfa2;
+  border-radius: 5px;
+  background-color: #8B966E;
+  width: 80%;
+}
+
+.input-button {
+  display: flex;
+  align-items: flex-end;
+}
+
+.input-label {
+  width: 70%;
+}
+
+.input-button > button {
+  border-radius: 2px;
+  background-color: #c4cfa2;
+  border: none;
+  text-align: center;
+  height: 43px;
+  width: 30%;
+}
+
+.panelPlayer > span {
+  font-family: 'Press Start 2P';
+  color: #C4CFA2;
+  font-size: 20px;
+  padding-top: .5em;
+  border-bottom: 1px solid;
+  width: 90%;
+  margin-bottom: 1em;
+  padding: .5em
+}
+
+span > strong {
+  color: orange;
+  font-size: 14px;
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+   50% {
+    opacity: 0;
+  }
+}

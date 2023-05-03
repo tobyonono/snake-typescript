@@ -1,17 +1,35 @@
 import { useEffect, useState } from "react";
 import './board.css';
-import { posIni, ROWS, COLS, bgColor } from '../const/const'
+import { posIni, ROWS, COLS, bgColor } from '../const/consts'
+import PanelStart from "../PanelStart";
+import PanelPlayer from "../PanelPlayer";
+import PanelEnd from "../PanelEnd";
 
 interface Props {
   snake: ISnake
+  fnMove:(spd:number) => void
+  setSnake: React.Dispatch<React.SetStateAction<ISnake>>
+  // setAxys: React.Dispatch<React.SetStateAction<IAxys>>
 }
 
-const Board = ({ snake }: Props) => {
+const Board = ({setSnake, fnMove, snake}: Props) => {
   const [pSnake, setPrevSnake] = useState<ISnake | undefined>(undefined);
 
   const setNode = (id: string, color: string) => {
     const node = document.getElementById(id);
     if (node) node.style.backgroundColor = color;
+  }
+
+  const resetGame = () => {    
+    Array(ROWS).fill(1).forEach( (elRow, r) =>
+      Array(COLS).fill(1).forEach( (elCol, c) => setNode(`${r}:${c}`, bgColor))
+    )
+
+    setSnake( oldS => {
+      let newS:ISnake = {...posIni, phase:0}
+
+      return newS;
+     })
   }
 
   useEffect(() => {
@@ -22,6 +40,7 @@ const Board = ({ snake }: Props) => {
     if (snake.fruit) {
       setNode(`${snake.fruit.row}:${snake.fruit.col}`, "green");
     }
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -35,18 +54,48 @@ const Board = ({ snake }: Props) => {
       setNode(`${pSnake.cells[0].row}:${pSnake.cells[0].col}`, bgColor)
     }
 
-    setNode(`${snake.cells[snake.cells.length - 1].row}:${snake.cells[snake.cells.length - 1].col}`, "red")
+    if (snake.cells.length > 0) {
+      setNode(`${snake.cells[snake.cells.length - 1].row}:${snake.cells[snake.cells.length - 1].col}`, "red")
+    }
 
     setPrevSnake(snake);
-  },
-    [snake])
+    // eslint-disable-next-line
+  },[snake])
+
+
+  const callStartGame = () => {
+    //setAxys({row:0, col:1})
+    fnMove(0)
+  }
+
 
   return (
     <div className="board4">
       <div className="board3">
         <div className="board2">
           <div className="board1">
-            {Array(ROWS).fill(1).map((exEl, r) =>
+
+            { snake.phase === 0 &&
+              <PanelStart
+                fnStart={ () => callStartGame()}
+              />
+            }
+
+            { snake.phase === 2 &&
+              <PanelPlayer
+                snake={snake}
+                setSnake={setSnake}
+              />
+            }
+
+            { snake.phase === 3 &&  
+              <PanelEnd
+                snake={snake}
+                resetGame={resetGame}
+              />      
+            }
+
+            { Array(ROWS).fill(1).map((exEl, r) =>
               <div key={r} className="row" >
                 {Array(COLS).fill(1).map((inEl, c) =>
                   <div key={`${r}:${c}`} id={`${r}:${c}`} className="empty">  </div>

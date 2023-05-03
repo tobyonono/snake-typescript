@@ -7,23 +7,20 @@ interface Props {
 }
 
 const PanelStart = ({fnStart}:Props) => {
-  const [show, setShow]= useState("");
 
-  const doStart = () => {
-    setShow("hiddenDiv");
-    fnStart()
-  }
+  const doStart = () => fnStart()
 
-  return <div className={`floatPanel ${show}`}>
-    <span>Click</span>
-    <button 
-      onClick={doStart}
-    > 
-      <BsPlayFill size={'80px'} />
-    </button>
-    <span>to start</span>
+  return <div className={`floatPanel`}>
 
+    <div className="topPart">
+      <span>Click</span>
+        <BsPlayFill 
+          onClick={doStart}
+        size={'80px'} />
+      <span>to start</span>
+    </div>
+
+    <span className="bottomPart"> Use Arrows to control </span>
   </div>  
-
 }
 export default PanelStart
