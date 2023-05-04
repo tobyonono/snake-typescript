@@ -5,27 +5,32 @@ declare global {
   const COLS:number = 50
   const ROWS:number = 20
   
-  interface IMaxScore {
+  interface MaxScore  {
     id:string
     value:number
     nickName:string
   }
 
-  interface IAxys {
+  interface Axys  {
     row: 1|0|-1
     col: 1|0|-1
   }
   
-  interface ICoordinate {
+  interface Coordinate  {
     row:number
     col:number
   }
   
-  interface ISnake {
+  interface Snake  {
     phase: 0|1|2|3;
     cells: ICoordinate[]
     fruit: ICoordinate
     idTimer:number
     maxScore:IMaxScore
+  }
+
+  interface AppData  {
+    snake:ISnake | null,
+    setSnake: (oldS:ISnake|null) => void
   }
 }

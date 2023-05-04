@@ -1,157 +1,121 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Board from "./Board"
-import { posIni, COLS, ROWS, speeds } from "./const/consts"
+import {COLS, ROWS, getNextFruit, speeds } from "./const/consts"
 import ScoreItem from "./ScoreItem"
-import {TbTrophy} from 'react-icons/tb'
+import { TbTrophy } from 'react-icons/tb'
+import {UserContext} from './SnakeProvider'
+import { getNewAxys } from "./utils/keyboardEvents"
 
-function App() {
-  const [axys, setAxys] = useState<IAxys>({ row: 0, col: 1 })
-  const [snake, setSnake] = useState<ISnake>(posIni)
+const App = () => {
+  const [axys, setAxys] =  useState<Axys>({row:0, col:1})
+  const {snake, setSnake} = useContext(UserContext)
 
-  const nextFruit = (cells:ICoordinate[]) => {
-    let pos: ICoordinate = {
-        row: Math.floor( Math.random() * ROWS),
-        col: Math.floor( Math.random() * COLS)
-    }
+  const nextFruit = (cells: Coordinate[]) => {
+    let pos: Coordinate
     do {
-      pos = {
-        row: Math.floor( Math.random() * ROWS),
-        col: Math.floor( Math.random() * COLS)
-        }
-        // eslint-disable-next-line
-      } while ( cells.find( e => e.col !== pos?.col && e.row === pos?.row) !== undefined )
-      return pos;
+      pos = getNextFruit()
+      // eslint-disable-next-line
+    } while (cells.find(e => e.col !== pos.col && e.row === pos.row) !== undefined)
+    return pos;
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     window.addEventListener("keydown", (key: KeyboardEvent) => {
-      let newAxys:IAxys = {row:0, col:0};
-      if( ( key.key === "ArrowLeft"  && axys.col ===  1) ||
-          ( key.key === "ArrowRight" && axys.col === -1) ||
-          ( key.key === "ArrowUp"    && axys.row ===  1) ||
-          ( key.key === "ArrowDown"  && axys.row === -1)      
-      ) return
-      
-      switch (key.key) {
-        case ("ArrowUp"):{
-          newAxys = {row:-1, col:0};
-          break
-        }
-        case "ArrowDown":{
-          newAxys = {row:1, col:0};
-          break
-        }
-        case "ArrowLeft":{
-          newAxys = {row:0, col:-1};
-          break
-        }
-        case "ArrowRight":{
-          newAxys = {row:0, col:1};
-          break
-        }
-      }
-      setAxys( prev => {
-        prev.row =  newAxys.row;
-        prev.col =  newAxys.col;
-        return prev;
+      let newAxys:Axys = getNewAxys(key.key, axys) 
+
+      setAxys( oldAx => {
+        oldAx.row =  newAxys?.row;
+        oldAx.col =  newAxys?.col;
+        return oldAx;
       });  
     });
     // eslint-disable-next-line
   }, [])
 
-  const move = (spd:number) => { 
-
-    setSnake(oldS => {
-      oldS.phase = 1
-      console.log(oldS);
-      return oldS;
-    })
-    
-    console.log(snake);
-    const id:any = setInterval( 
-      () => pushSnake(), speeds[spd]
-    )
-    setSnake({...snake, idTimer:id})
-
-    return () => clearInterval(id);
-  }
-  
   const pushSnake = () => {
-    setSnake( oldS => {
-      let newSnake:ISnake;
+    setSnake((oldS:Snake) => {
+      let newSnake: Snake;
 
-      let nextCell: ICoordinate = { 
-        row: oldS.cells[oldS.cells.length - 1].row + axys.row, 
+      let nextCell: Coordinate = {
+        row: oldS.cells[oldS.cells.length - 1].row + axys.row,
         col: oldS.cells[oldS.cells.length - 1].col + axys.col
-      }       
-      
-      if (nextCell.row < 0      || 
-          nextCell.row > ROWS-1 || 
-          nextCell.col < 0      ||
-          nextCell.col > COLS-1 ||
-          oldS.cells.find( e => e.col === nextCell.col && e.row === nextCell.row) !== undefined  
-        ) {
+      }
+
+      if (nextCell.row < 0 ||
+        nextCell.row > ROWS - 1 ||
+        nextCell.col < 0 ||
+        nextCell.col > COLS - 1 ||
+        oldS.cells.find(e => e.col === nextCell.col && e.row === nextCell.row) !== undefined
+      ) {
+
         oldS.phase = 2;
-        
+
         clearInterval(oldS.idTimer);
       }
-      
-      if (nextCell.col === oldS.fruit.col && nextCell.row === oldS.fruit.row  ) {
+
+      if (nextCell.col === oldS.fruit.col && nextCell.row === oldS.fruit.row) {
         newSnake = {
           ...oldS,
-          cells:[...oldS.cells, nextCell], 
+          cells: [...oldS.cells, nextCell],
           fruit: nextFruit(oldS.cells),
-        };              
+        };
       } else {
         newSnake = {
           ...oldS,
-          cells:[...oldS.cells.slice(1), nextCell],
-        };          
+          cells: [...oldS.cells.slice(1), nextCell],
+        };
       }
       return newSnake;
-    })        
+    })
   }
 
+  const move = () => {
 
-  return (
-    <div className="App">
-      {/* { snake.phase == 0 &&
-        <PanelStart
-          fnStart={ () => move(0)}
-        />
-      } */}
+    setAxys( oldAx => {
+      oldAx.row = 0
+      oldAx.col = 1
+      return oldAx;
+    });  
 
-      {/* { snake.phase == 2 &&
-        <PanelPlayer
-          snake={snake}
-          setSnake={setSnake}
-        />
-      } */}
-
-
-      <div className="placar">
-        <ScoreItem
-          description="Points:"
-          value={snake.cells.length-3}
-          >
-        </ScoreItem>
+    const id = setInterval(() => pushSnake(), speeds[0])
       
-        <ScoreItem
-          description={""}
-            value={snake.maxScore.value}
-          >
-          <TbTrophy size={'20px'} />
-        </ScoreItem>
-      </div>
+    setSnake((oldS:Snake) => {
+      return {...oldS, phase:1, idTimer:id};
+    })
 
-      <Board
-        snake={snake}
-        setSnake={setSnake}
-        fnMove={ move }
-      />
+    return () => clearInterval(id);
+  }
+
+  return <div className="App">
+    <div className="placar">
+      <ScoreItem
+        description="Points:"
+        value={snake.cells.length - 3}
+      >
+      </ScoreItem>
+
+      <ScoreItem
+        description={""}
+        value={snake.maxScore.value}
+      >
+        <TbTrophy size={'20px'} />
+      </ScoreItem>
     </div>
-  );
+
+    <Board
+      fnMove={move}
+    />
+
+      <div className="snake">
+        <p>cells: {snake.cells.length}</p>
+        <p>phase: {snake.phase} </p>
+
+        <p>{axys.row}</p>
+        <p>{axys.col}</p>
+
+    </div>
+  </div>
 }
 
 export default App;

@@ -5,16 +5,17 @@ import * as Utils from '../utils'
 import { TbReload } from 'react-icons/tb'
 
 interface Props {
-  snake:ISnake;
-  resetGame: () =>void
+  snake:Snake;
+  resetGame: () => void
 }
 
 const PanelEnd = ({snake, resetGame }: Props) => {
-  const [ranking, setRanking] = useState<IMaxScore[]>([])
+  const [ranking, setRanking] = useState<MaxScore[]>([])
 
   useEffect(() => {
     API.getRecords().then(res => setRanking(res)) 
-  }, [snake.phase == 3])
+    // eslint-disable-next-line
+  }, [snake.phase === 3])
 
   const reloadSnake = () => {
     resetGame()
@@ -43,13 +44,10 @@ return <div className="endPanel">
       </div>
     </div>
 
-
     <TbReload size={'50px'}
       onClick={reloadSnake}
     />
 
   </div>
-
-
 }
 export default PanelEnd

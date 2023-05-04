@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {BsPlayFill} from 'react-icons/bs'
 import './panelStart.css'
 
@@ -8,7 +7,9 @@ interface Props {
 
 const PanelStart = ({fnStart}:Props) => {
 
-  const doStart = () => fnStart()
+  const doStart = () => {
+    fnStart()
+  }
 
   return <div className={`floatPanel`}>
 

@@ -1,23 +1,19 @@
-import React, { FormEvent, useState } from "react"
+import { FormEvent, useContext } from "react"
 import './panelPlayer.css'
 import { BiCheckDouble } from 'react-icons/bi'
 import * as API from '../api'
 import { saveToStorage } from "../const/consts"
+import { UserContext } from "../SnakeProvider"
 
-interface Props {
-  snake: ISnake,
-  setSnake: React.Dispatch<React.SetStateAction<ISnake>>
-}
-const PanelPlayer = ({ snake, setSnake }: Props) => {
-  const [name, setName] = useState<string>(snake.maxScore.nickName)
+const PanelPlayer = () => {
+  const { snake, setSnake } = useContext(UserContext)
 
-  const updateRecord = (newRec:IMaxScore) => {
-    API
-      .updateDocument(newRec.id, newRec)
+  const updateRecord = (newRec: MaxScore) => {
+    API.updateDocument(newRec.id, newRec)
       .then(res => saveToStorage(newRec))
   }
 
-  const addRecord = (newRec:IMaxScore) => {
+  const addRecord = (newRec: MaxScore) => {
     API.addRecord(newRec)
       .then(res => {
         newRec.id = res.id
@@ -26,23 +22,31 @@ const PanelPlayer = ({ snake, setSnake }: Props) => {
   }
 
   const registerRecord = () => {
-    const newScore: IMaxScore = {...snake.maxScore, nickName:name}
+    const newScore: MaxScore = { ...snake.maxScore }
 
     if (snake.cells.length - 3 > snake.maxScore.value) {
       newScore.value = snake.cells.length - 3
     }
-   
+
     if (snake.cells.length - 3 > snake.maxScore.value) {
       newScore.id
-      ? updateRecord(newScore)
-      : addRecord(newScore)
+        ? updateRecord(newScore)
+        : addRecord(newScore)
     }
-      
-    setSnake( oldS => {
-      const newS:ISnake = {...oldS}
+
+    setSnake((oldS: Snake) => {
+      const newS: Snake = { ...oldS }
       newS.phase = 3
       //      newS.maxScore = newScore;
       return newS;
+    })
+  }
+
+  const changeNickName = (e: FormEvent<HTMLInputElement>) => {
+    setSnake((oldS: Snake) => {
+      const newS: Snake = { ...oldS }
+      newS.maxScore.nickName = e.currentTarget.value
+      return newS
     })
   }
 
@@ -62,13 +66,13 @@ const PanelPlayer = ({ snake, setSnake }: Props) => {
           type="text"
           maxLength={10}
           minLength={3}
-          value={name}
-          onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
+          value={snake.maxScore.nickName}
+          onChange={changeNickName}
           autoFocus
         />
       </div>
       <button
-        disabled={name?.length < 3}
+        disabled={snake.maxScore.nickName.length < 3}
         onClick={registerRecord}
       >
         <BiCheckDouble size={'25px'} />
