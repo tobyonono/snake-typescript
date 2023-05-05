@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import './panelEnd.css'
 import * as API from '../api'
-import * as Utils from '../utils'
+import * as Utils from '../utils/formatScore'
 import { TbReload } from 'react-icons/tb'
 
 interface Props {
@@ -27,7 +27,7 @@ return <div className="endPanel">
     <div className="panel-content" >
       <div className="panel-content-l" >
         <span>
-          <strong>You:</strong>
+          You:
           {Utils.formatScore(snake.cells.length-3)}
         </span>
       </div>

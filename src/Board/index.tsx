@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import './board.css';
-import { posIni, ROWS, COLS, bgColor } from '../const/consts'
+import { posIni, cols, rows, bgColor } from '../const/consts'
 import PanelStart from "../PanelStart";
 import PanelPlayer from "../PanelPlayer";
 import PanelEnd from "../PanelEnd";
-import { UserContext } from "../SnakeProvider";
+import { SnakeContext } from "../SnakeContext/SnakeProvider";
 
 interface Props {
   fnMove: () => void
 }
 
 const Board = ({ fnMove }: Props) => {
-  const {snake, setSnake} = useContext(UserContext)
+  const {snake, setSnake} = useContext(SnakeContext)
   const [pSnake, setPrevSnake] = useState<Snake | undefined>(undefined);
   const setNode = (id: string, color: string) => {
     const node = document.getElementById(id);
@@ -19,8 +19,8 @@ const Board = ({ fnMove }: Props) => {
   }
 
   const resetGame = () => {
-    Array(ROWS).fill(1).forEach((eR, r) =>
-      Array(COLS).fill(1).forEach((eL, c) => setNode(`${r}:${c}`, bgColor))
+    Array(rows).fill(1).forEach((eR, r) =>
+      Array(cols).fill(1).forEach((eL, c) => setNode(`${r}:${c}`, bgColor))
     )
 
     setSnake(() => {
@@ -80,13 +80,14 @@ const Board = ({ fnMove }: Props) => {
               />
             }
 
-            {Array(ROWS).fill(1).map((exEl, r) =>
+            {Array(rows).fill(1).map((exEl, r) =>
               <div key={r} className="row" >
-                {Array(COLS).fill(1).map((inEl, c) =>
+                {Array(cols).fill(1).map((inEl, c) =>
                   <div key={`${r}:${c}`} id={`${r}:${c}`} className="empty">  </div>
                 )}
-              </div>
+              </div> 
             )}
+         
           </div>
         </div>
       </div>

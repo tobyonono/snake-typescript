@@ -1,6 +1,8 @@
-export const COLS: number = 40 //50
+const cells: Coordinate[] = ([{row:5, col:16}, {row:5, col:17}, {row:5, col:18}]) 
 
-export const ROWS: number = 25 //30
+export const cols: number = 40 //50
+
+export const rows: number = 25 //30
 
 export const bgColor: string = '#C4CFA2'
 
@@ -15,16 +17,13 @@ export const getFromStorage = () => {
 export const saveToStorage = (maxScore: MaxScore) => localStorage
 .setItem('snaky-score', JSON.stringify(maxScore)); 
 
-
 export const getNextFruit = () => {
   let fruit:Coordinate = {
-    row: Math.floor(Math.random() * ROWS),
-    col: Math.floor(Math.random() * COLS)
+    row: Math.floor(Math.random() * rows),
+    col: Math.floor(Math.random() * cols)
   }
   return fruit
 }
-
-const cells: Coordinate[] = ([{row:5, col:16}, {row:5, col:17}, {row:5, col:18}]) 
 
 export const posIni:Snake = ({
   phase: 0,

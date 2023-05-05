@@ -11,7 +11,7 @@ const PanelStart = ({fnStart}:Props) => {
     fnStart()
   }
 
-  return <div className={`floatPanel`}>
+  return <div className="panelStart">
 
     <div className="topPart">
       <span>Click</span>

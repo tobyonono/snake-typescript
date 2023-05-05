@@ -1,6 +1,6 @@
 import React from "react";
 import './scoreItem.css'
-import * as Utils from '../utils'
+import * as Utils from '../utils/formatScore'
 
 interface Props {
   description:string

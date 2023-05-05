@@ -1,7 +1,15 @@
 @import 'reset.css';
 
-body{
+* {
+  --color1: #C4CFA2;
+  --color2: #8B966E;
+  --color3: #B0BB92;
+  --color4: #545B41;
+}
+
+body {
   background-color: #414141;
+  overflow: hidden;
 }
 
 .App {
@@ -13,7 +21,7 @@ body{
 .placar {
   padding: .5em 0;
   display: flex;
-  /* justify-content: space-between; */
+ justify-content: space-between;
 }
 
 .snake {

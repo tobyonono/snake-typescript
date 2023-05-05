@@ -3,10 +3,10 @@ import './panelPlayer.css'
 import { BiCheckDouble } from 'react-icons/bi'
 import * as API from '../api'
 import { saveToStorage } from "../const/consts"
-import { UserContext } from "../SnakeProvider"
+import { SnakeContext } from "../SnakeContext/SnakeProvider"
 
 const PanelPlayer = () => {
-  const { snake, setSnake } = useContext(UserContext)
+  const { snake, setSnake } = useContext(SnakeContext)
 
   const updateRecord = (newRec: MaxScore) => {
     API.updateDocument(newRec.id, newRec)

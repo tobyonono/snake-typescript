@@ -1,36 +1,64 @@
 .board1 {
-  right: auto;
-  width: 500px;
-  /* height: 300px; */
-  border-style: solid;
-  border-width: thin;
-  border: 2px solid #555C3C;
   display: flex;
+  width: 500px;
+  border: 2px solid #555C3C;
   flex-direction: column;
   background-color: #c4cfa2;
+  justify-content: center;
 }
-.board2{
-  border: 15px solid #8B966E;  
+
+.board2 {
+  border: 8px solid #8B966E;
+  border-radius: 2px;
+}
+
+.board3 {
+  border: 8px solid #B0BB92;
   border-radius: 5px;
 }
-.board3{
-  border: 8px solid #B0BB92;  
-  border-radius: 15px;
+
+.board4 {
+  border: 8px solid #545B41;
+  border-radius: 5px;
 }
-.board4{
-  border: 10px solid #545B41;  
-  border-radius: 25px;
-}
+
 .row {
   display: flex;
 }
+
 .empty {
   width: 20px;
   height: 10px;
   font-size: 6px;
 }
+
 .filled {
-  background-color:  red;
+  background-color: red;
   width: 40px;
   height: 0px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .board4 {
+    /* border: 10px solid red; */
+    width: 95%;
+    /* display: flex; */
+  }
+
+  .board1 {
+    width: 100%;
+  }
+
+  .empty {
+    width: (--variable-width / 40);
+    height: 10px;
+    font-size: 6px;
+  }
+  
+  .filled {
+    background-color: red;
+    width: 20px;
+    height: 0px;
+  }
 }

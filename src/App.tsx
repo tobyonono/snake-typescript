@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Board from "./Board"
-import {COLS, ROWS, getNextFruit, speeds } from "./const/consts"
+import {cols, rows, getNextFruit, speeds } from "./const/consts"
 import ScoreItem from "./ScoreItem"
 import { TbTrophy } from 'react-icons/tb'
-import {UserContext} from './SnakeProvider'
+import {SnakeContext} from './SnakeContext/SnakeProvider'
 import { getNewAxys } from "./utils/keyboardEvents"
+import { detectMob } from "./utils/isMobile"
+import Arrows from "./Arrows/Arrows"
+import Footer from "./Footer/Footer"
 
 const App = () => {
   const [axys, setAxys] =  useState<Axys>({row:0, col:1})
-  const {snake, setSnake} = useContext(UserContext)
+  const {snake, setSnake} = useContext(SnakeContext)
 
   const nextFruit = (cells: Coordinate[]) => {
     let pos: Coordinate
@@ -21,17 +24,21 @@ const App = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", (key: KeyboardEvent) => {
-      let newAxys:Axys = getNewAxys(key.key, axys) 
-
-      setAxys( oldAx => {
-        oldAx.row =  newAxys?.row;
-        oldAx.col =  newAxys?.col;
-        return oldAx;
-      });  
-    });
+    window
+      .addEventListener("keydown", 
+      (key: KeyboardEvent) => setAppAxys(key.key)
+    );
     // eslint-disable-next-line
   }, [])
+  
+  const setAppAxys = (key:string) => {
+    let newAxys:Axys = getNewAxys(key, axys) 
+    setAxys( oldAx => {
+      oldAx.row =  newAxys.row;
+      oldAx.col =  newAxys.col;
+      return oldAx;
+    });  
+  }
 
   const pushSnake = () => {
     setSnake((oldS:Snake) => {
@@ -43,9 +50,9 @@ const App = () => {
       }
 
       if (nextCell.row < 0 ||
-        nextCell.row > ROWS - 1 ||
+        nextCell.row > rows - 1 ||
         nextCell.col < 0 ||
-        nextCell.col > COLS - 1 ||
+        nextCell.col > cols - 1 ||
         oldS.cells.find(e => e.col === nextCell.col && e.row === nextCell.row) !== undefined
       ) {
 
@@ -107,15 +114,16 @@ const App = () => {
       fnMove={move}
     />
 
-      <div className="snake">
-        <p>cells: {snake.cells.length}</p>
-        <p>phase: {snake.phase} </p>
+    { detectMob() &&  snake.phase == 1 &&
+      <Arrows
+        setAppAxys={setAppAxys}
+      />
+    }
 
-        <p>{axys.row}</p>
-        <p>{axys.col}</p>
+    <Footer/>
 
-    </div>
   </div>
+
 }
 
 export default App;

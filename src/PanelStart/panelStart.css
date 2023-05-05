@@ -1,4 +1,4 @@
-.floatPanel {
+.panelStart {
   position: absolute;
   margin: 1em;
   width: 465px;
@@ -11,8 +11,10 @@
   justify-content: center;
 }
 .topPart {
+  width: 70%;
   display:flex;
   align-items: center;
+  justify-content: space-around;
 }
 .bottomPart {
   margin-top: 2em;
@@ -31,4 +33,11 @@ span {
   font-family: 'Press Start 2P';
   color: #C4CFA2;
   font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .panelStart {
+    width: 80%;
+  }
 }

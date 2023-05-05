@@ -1,42 +1,26 @@
 
 .endPanel {
   position: absolute;
-  margin: 1em;
-  width: 465px;
+  margin: .5em;
+  width: 480px;
   height: 215px;
   background-color: #414141;
   border-radius: 5px;
   display:flex;
   align-items: center;
-  justify-content: center;
-
-  display:flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
-  animation:fadeIn 1s; 
-  
+  animation:fadeIn 1s;   
 }
-
 
 .endPanel svg {
   position: absolute;
   bottom: 5px;
-  background-color: #8B966E;
+  background-color: var(--color1);
   border-radius: 5px;
+  color: var(--color4);
+  border: 5px solid var(--color3);
 }
-
-
-
-/* .endPanel > button {
-  height: 60%;
-  width: 30%;
-  margin: 1em;
-  border-radius: 20px;
-  color: #555C3C;
-  background-color: #8B966E;
-  border: none;
-} */
 
 .title {
   border-bottom: 1px solid;
@@ -56,14 +40,13 @@
 }
 
 .panel-content {
+  justify-content: space-between;
   width: 90%;
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .panel-content-l {
   width: 50%;
-  text-align: center;
 }
 
 .panel-content-r {
@@ -75,10 +58,9 @@ li {
   justify-content: space-between;
 }
 
-
 li > span:last-child {
   padding: 0.2em .2em;
-  color:red;
+  /* color:; */
   text-align: right;
 }
 
@@ -88,7 +70,7 @@ span {
   padding: 0;
   font-family: 'Press Start 2P';
   color: #C4CFA2;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .btnEnd {
@@ -96,4 +78,15 @@ span {
   width: 20px;
   height: 20px;
   bottom:  0px;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .endPanel {
+    width: 85%;
+  }
+
+  span {
+    font-size: 9px;
+  }
 }
