@@ -1,7 +1,7 @@
 import { CgArrowDown, CgArrowUp, CgArrowLeft, CgArrowRight } from 'react-icons/cg'
 import './arrows.css'
 
-const size:number = 80;
+const size:number = 50;
 
 interface Props {
   setAppAxys: (key:string) => void

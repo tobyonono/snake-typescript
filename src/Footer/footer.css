@@ -23,3 +23,7 @@ a {
 .footer span:hover {
   color: var(--color3);
 }
+
+.footer span {
+  font-size: 8px;
+}

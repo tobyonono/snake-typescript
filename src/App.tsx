@@ -6,13 +6,19 @@ import ScoreItem from "./ScoreItem"
 import { TbTrophy } from 'react-icons/tb'
 import {SnakeContext} from './SnakeContext/SnakeProvider'
 import { getNewAxys } from "./utils/keyboardEvents"
-import { detectMob } from "./utils/isMobile"
-import Arrows from "./Arrows/Arrows"
 import Footer from "./Footer/Footer"
+import useSwipe from "./utils/mySwipe"
 
 const App = () => {
   const [axys, setAxys] =  useState<Axys>({row:0, col:1})
   const {snake, setSnake} = useContext(SnakeContext)
+
+  const swipeHandlers = useSwipe({ 
+    onSwipedRight: () => setAppAxys('ArrowRight'),
+    onSwipedLeft: () => setAppAxys('ArrowLeft'),
+    onSwipedUp: () => setAppAxys('ArrowUp'),
+    onSwipedDown: () => setAppAxys('ArrowDown'),
+  });
 
   const nextFruit = (cells: Coordinate[]) => {
     let pos: Coordinate
@@ -94,7 +100,8 @@ const App = () => {
     return () => clearInterval(id);
   }
 
-  return <div className="App">
+  return <div className="App" {...swipeHandlers}>
+
     <div className="placar">
       <ScoreItem
         description="Points:"
@@ -113,13 +120,6 @@ const App = () => {
     <Board
       fnMove={move}
     />
-
-    { detectMob() &&  snake.phase == 1 &&
-      <Arrows
-        setAppAxys={setAppAxys}
-      />
-    }
-
     <Footer/>
 
   </div>
