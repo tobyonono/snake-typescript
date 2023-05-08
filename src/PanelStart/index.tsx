@@ -21,7 +21,7 @@ const PanelStart = ({fnStart}:Props) => {
       <span>to start</span>
     </div>
 
-    <span className="bottomPart"> Use Arrows to control </span>
+    <span className="bottomPart"> Use Arrows/swiper to control </span>
   </div>  
 }
 export default PanelStart
