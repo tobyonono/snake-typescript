@@ -1,10 +1,11 @@
 .board1 {
   display: flex;
-  width: 500px;
+  width: 100%;
   border: 2px solid #555C3C;
   flex-direction: column;
   background-color: #c4cfa2;
   justify-content: center;
+  align-items: center;
 }
 
 .board2 {
@@ -27,8 +28,8 @@
 }
 
 .empty {
-  width: 20px;
-  height: 10px;
+  width: 1.3vw;
+  height: 1.3vw;
   font-size: 6px;
 }
 
@@ -40,10 +41,9 @@
 
 
 @media only screen and (max-width: 600px) {
+  
   .board4 {
-    /* border: 10px solid red; */
     width: 95%;
-    /* display: flex; */
   }
 
   .board1 {
@@ -51,10 +51,11 @@
   }
 
   .empty {
-    width: (--variable-width / 40);
+    width: 20px;
     height: 10px;
     font-size: 6px;
   }
+
   
   .filled {
     background-color: red;

@@ -1,8 +1,8 @@
 const cells: Coordinate[] = ([{row:5, col:16}, {row:5, col:17}, {row:5, col:18}]) 
 
-export const cols: number = 40 //50
+export const cols: number = 50 //50
 
-export const rows: number = 25 //30
+export const rows: number = 30 //30
 
 export const bgColor: string = '#C4CFA2'
 
