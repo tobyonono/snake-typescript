@@ -7,6 +7,7 @@
   --color4: #545B41;
 }
 
+
 body {
   background-color: #414141;
   overflow: hidden;
@@ -16,13 +17,20 @@ body {
   display:flex;
   flex-direction: column;
   align-items: center;
-  height: 500px;
+  justify-content: center;
+  height: 90vh;
+}
+
+@media (max-width: 768px) {
+  .App {
+    height: 500px;
+  }
 }
 
 .placar {
   padding: .5em 0;
   display: flex;
- justify-content: space-between;
+  justify-content: space-between;
 }
 
 .snake {
