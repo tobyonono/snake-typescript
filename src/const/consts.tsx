@@ -6,7 +6,7 @@ export const rows: number = 30 //30
 
 export const bgColor: string = '#C4CFA2'
 
-export const speeds:number[] = [150]
+export const speeds:number[] = [150, 145, 140, 135, 130, 125, 120, 115, 110, 105, 100]
 
 export const getFromStorage = () => {  
   return JSON
@@ -30,5 +30,5 @@ export const posIni:Snake = ({
   maxScore: getFromStorage(),
   cells: cells, 
   fruit: getNextFruit(), 
-  idTimer:0
+  idTimer: setTimeout(()=>{}, 0)
 }) 

@@ -65,20 +65,30 @@ const App = () => {
         oldS.phase = 2;
 
         clearInterval(oldS.idTimer);
+        newSnake = {...oldS}
+        return newSnake
       }
+      
+      let speedIndex = 0
 
       if (nextCell.col === oldS.fruit.col && nextCell.row === oldS.fruit.row) {
+        speedIndex = oldS.cells.length - 2
         newSnake = {
           ...oldS,
           cells: [...oldS.cells, nextCell],
           fruit: nextFruit(oldS.cells),
         };
       } else {
+        speedIndex = oldS.cells.length - 3
         newSnake = {
           ...oldS,
           cells: [...oldS.cells.slice(1), nextCell],
         };
-      }
+      }     
+      
+      if (speedIndex>10) speedIndex = 10 //Speed limit
+      const id = setTimeout(() => pushSnake(), speeds[speedIndex])
+      newSnake.idTimer = id
       return newSnake;
     })
   }
@@ -91,7 +101,7 @@ const App = () => {
       return oldAx;
     });  
 
-    const id = setInterval(() => pushSnake(), speeds[0])
+    const id = setTimeout(() => pushSnake(), speeds[0])
       
     setSnake((oldS:Snake) => {
       return {...oldS, phase:1, idTimer:id};
