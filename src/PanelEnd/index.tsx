@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import './panelEnd.css'
 import * as API from '../api'
 import * as Utils from '../utils/formatScore'
@@ -21,18 +21,18 @@ const PanelEnd = ({snake, resetGame }: Props) => {
     resetGame()
   }
 
-return <div className="endPanel">
-    <span className="title">Results</span>
+return <div className='endPanel'>
+    <span className='title'>Results</span>
 
-    <div className="panel-content" >
-      <div className="panel-content-l" >
+    <div className='panel-content' >
+      <div className='panel-content-l' >
         <span>
           You:
           {Utils.formatScore(snake.cells.length-3)}
         </span>
       </div>
 
-      <div className="panel-content-r" >
+      <div className='panel-content-r' >
         <ul>
           {ranking.map((el, idx) =>
             <li key={idx}>

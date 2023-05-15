@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
-import Board from "./Board"
-import {cols, rows, getNextFruit, speeds } from "./const/consts"
-import ScoreItem from "./ScoreItem"
+import Board from './Board'
+import {cols, rows, getNextFruit, speeds } from './const/consts'
+import ScoreItem from './ScoreItem'
 import { TbTrophy } from 'react-icons/tb'
 import {SnakeContext} from './SnakeContext/SnakeProvider'
-import { getNewAxys } from "./utils/keyboardEvents"
-import Footer from "./Footer/Footer"
-import useSwipe from "./utils/mySwipe"
+import { getNewAxys } from './utils/keyboardEvents'
+import Footer from './Footer/Footer'
+import useSwipe from './utils/mySwipe'
 
 const App = () => {
   const [axys, setAxys] =  useState<Axys>({row:0, col:1})
@@ -31,7 +31,7 @@ const App = () => {
 
   useEffect(() => {
     window
-      .addEventListener("keydown", 
+      .addEventListener('keydown', 
       (key: KeyboardEvent) => setAppAxys(key.key)
     );
     // eslint-disable-next-line
@@ -110,17 +110,17 @@ const App = () => {
     return () => clearInterval(id);
   }
 
-  return <div className="App" {...swipeHandlers}>
+  return <div className='App' {...swipeHandlers}>
 
-    <div className="placar">
+    <div className='placar'>
       <ScoreItem
-        description="Points:"
+        description='Points:'
         value={snake.cells.length - 3}
       >
       </ScoreItem>
 
       <ScoreItem
-        description={""}
+        description={''}
         value={snake.maxScore.value}
       >
         <TbTrophy size={'20px'} />

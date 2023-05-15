@@ -27,7 +27,7 @@
   display: flex;
 }
 
-.empty {
+.empty, .red, .green, .bgColor {
   width: 1.3vw;
   height: 1.3vw;
   font-size: 6px;
@@ -39,9 +39,26 @@
   height: 0px;
 }
 
+.red {
+  background-color: red;
+  animation: bend 1s infinite
+}
+
+.green {
+  background-color: green;
+  animation: shake 3s infinite;
+}
+
+@keyframes shake {
+  33% {transform: rotate(23deg);}
+  66% {transform: rotate(-20deg);}
+}
+
+@keyframes bend {
+  50% {border-radius: 5px;}
+}
 
 @media only screen and (max-width: 600px) {
-  
   .empty {
     width: 1.7vw;
     height: 1.7vw;

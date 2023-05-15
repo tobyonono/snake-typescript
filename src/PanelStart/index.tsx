@@ -11,9 +11,9 @@ const PanelStart = ({fnStart}:Props) => {
     fnStart()
   }
 
-  return <div className="panelStart">
+  return <div className='panelStart'>
 
-    <div className="topPart">
+    <div className='topPart'>
       <span>Click</span>
         <BsPlayFill 
           onClick={doStart}
@@ -21,7 +21,7 @@ const PanelStart = ({fnStart}:Props) => {
       <span>to start</span>
     </div>
 
-    <span className="bottomPart"> Use Arrows/swiper to control </span>
+    <span className='bottomPart'> Use Arrows/swiper to control </span>
   </div>  
 }
 export default PanelStart

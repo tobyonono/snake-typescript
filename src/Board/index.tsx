@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
 import './board.css';
-import { posIni, cols, rows, bgColor } from '../const/consts'
-import PanelStart from "../PanelStart";
-import PanelPlayer from "../PanelPlayer";
-import PanelEnd from "../PanelEnd";
-import { SnakeContext } from "../SnakeContext/SnakeProvider";
+import { posIni, cols, rows } from '../const/consts'
+import PanelStart from '../PanelStart';
+import PanelPlayer from '../PanelPlayer';
+import PanelEnd from '../PanelEnd';
+import { SnakeContext } from '../SnakeContext/SnakeProvider';
 
 interface Props {
   fnMove: () => void
@@ -15,12 +15,12 @@ const Board = ({ fnMove }: Props) => {
   const [pSnake, setPrevSnake] = useState<Snake | undefined>(undefined);
   const setNode = (id: string, color: string) => {
     const node = document.getElementById(id);
-    if (node) node.style.backgroundColor = color;
+    if (node) node.className = (color);
   }
 
   const resetGame = () => {
     Array(rows).fill(1).forEach((eR, r) =>
-      Array(cols).fill(1).forEach((eL, c) => setNode(`${r}:${c}`, bgColor))
+      Array(cols).fill(1).forEach((eL, c) => setNode(`${r}:${c}`, 'bgColor'))
     )
 
     setSnake(() => {
@@ -31,39 +31,46 @@ const Board = ({ fnMove }: Props) => {
 
   useEffect(() => {
     posIni.cells.forEach((cell: Coordinate) => {
-      setNode(`${cell.row}:${cell.col}`, "red");
+      setNode(`${cell.row}:${cell.col}`, 'red');
     })
 
     if (snake.fruit) {
-      setNode(`${snake.fruit.row}:${snake.fruit.col}`, "green");
+      setNode(`${snake.fruit.row}:${snake.fruit.col}`, 'green');
     }
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
-    setNode(`${snake.fruit.row}:${snake.fruit.col}`, "green");
+    setNode(`${snake.fruit.row}:${snake.fruit.col}`, 'green');
 
     if (pSnake?.fruit.col !== snake.fruit.col && pSnake?.fruit.row !== snake.fruit.row) {
-      setNode(`${pSnake?.fruit.row}:${pSnake?.fruit.col}`, bgColor)
+      setNode(`${pSnake?.fruit.row}:${pSnake?.fruit.col}`, 'bgColor')
     }
 
     if (pSnake) {
-      setNode(`${pSnake.cells[0].row}:${pSnake.cells[0].col}`, bgColor)
+      setNode(`${pSnake.cells[0].row}:${pSnake.cells[0].col}`, 'bgColor')
     }
 
     if (snake.cells.length > 0) {
-      setNode(`${snake.cells[snake.cells.length - 1].row}:${snake.cells[snake.cells.length - 1].col}`, "red")
+      setNode(`${snake.cells[snake.cells.length - 1].row}:${snake.cells[snake.cells.length - 1].col}`, 'red')
     }
 
+    if (snake.phase !== 1) {
+      setNode(`${snake.fruit.row}:${snake.fruit.col}`, 'bgColor')
+
+      snake.cells.forEach(
+        (cell:Coordinate) => setNode(`${cell.row}:${cell.col}`, 'bgColor')  
+      );
+    }
     setPrevSnake(snake);
     // eslint-disable-next-line
   }, [snake])
 
   return (
-    <div className="board4">
-      <div className="board3">
-        <div className="board2">
-          <div className="board1">
+    <div className='board4'>
+      <div className='board3'>
+        <div className='board2'>
+          <div className='board1'>
 
             {snake.phase === 0 &&
               <PanelStart
@@ -81,9 +88,9 @@ const Board = ({ fnMove }: Props) => {
             }
 
             {Array(rows).fill(1).map((exEl, r) =>
-              <div key={r} className="row" >
+              <div key={r} className='row' >
                 {Array(cols).fill(1).map((inEl, c) =>
-                  <div key={`${r}:${c}`} id={`${r}:${c}`} className="empty">  </div>
+                  <div key={`${r}:${c}`} id={`${r}:${c}`} className='empty'>  </div>
                 )}
               </div> 
             )}

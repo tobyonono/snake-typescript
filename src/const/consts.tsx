@@ -1,4 +1,4 @@
-const cells: Coordinate[] = ([{row:5, col:16}, {row:5, col:17}, {row:5, col:18}]) 
+const cells: Coordinate[] = ([{row:2, col:16}, {row:2, col:17}, {row:2, col:18}]) 
 
 export const cols: number = 50 //50
 

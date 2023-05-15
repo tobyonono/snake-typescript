@@ -1,16 +1,16 @@
-import { FormEvent, useContext } from "react"
+import { FormEvent, useContext } from 'react'
 import './panelPlayer.css'
 import { BiCheckDouble } from 'react-icons/bi'
 import * as API from '../api'
-import { saveToStorage } from "../const/consts"
-import { SnakeContext } from "../SnakeContext/SnakeProvider"
+import { saveToStorage } from '../const/consts'
+import { SnakeContext } from '../SnakeContext/SnakeProvider'
 
 const PanelPlayer = () => {
   const { snake, setSnake } = useContext(SnakeContext)
 
   const updateRecord = (newRec: MaxScore) => {
     API.updateDocument(newRec.id, newRec)
-      .then(res => saveToStorage(newRec))
+      .then( () => saveToStorage(newRec))
   }
 
   const addRecord = (newRec: MaxScore) => {
@@ -50,20 +50,20 @@ const PanelPlayer = () => {
     })
   }
 
-  return <div className="panelPlayer">
+  return <div className='panelPlayer'>
     <span>Game Over
       {snake.maxScore.value < snake.cells.length - 3
         ? <strong> New Record </strong>
-        : ""
+        : ''
       }
     </span>
 
-    <div className="input-button">
-      <div className="input-label">
+    <div className='input-button'>
+      <div className='input-label'>
         <span>Your nickName:</span>
         <input
-          id="myInput"
-          type="text"
+          id='myInput'
+          type='text'
           maxLength={10}
           minLength={3}
           value={snake.maxScore.nickName}

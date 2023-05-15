@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { posIni } from "../const/consts";
+import React, { useState } from 'react';
+import { posIni } from '../const/consts';
 
 interface Props {
   children: React.ReactNode | undefined;

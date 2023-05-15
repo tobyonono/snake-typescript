@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import SnakeProvider from "./SnakeContext/SnakeProvider";
+import SnakeProvider from './SnakeContext/SnakeProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
