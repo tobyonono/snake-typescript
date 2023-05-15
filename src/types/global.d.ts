@@ -25,7 +25,7 @@ declare global {
     phase: 0|1|2|3;
     cells: ICoordinate[]
     fruit: ICoordinate
-    idTimer:number
+    idTimer: NodeJS.Timeout
     maxScore:IMaxScore
   }
 
