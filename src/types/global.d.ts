@@ -35,3 +35,8 @@ declare global {
     setSnake: (oldS:ISnake|null) => void
   }
 }
+
+declare module "*.png" {
+  const value: any;
+  export = value;
+}

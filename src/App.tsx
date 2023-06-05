@@ -7,6 +7,7 @@ import { TbTrophy } from 'react-icons/tb'
 import { SnakeContext } from './SnakeContext/SnakeProvider'
 import { getNewAxys } from './utils/keyboardEvents'
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import useSwipe from './utils/mySwipe'
 
 const App = () => {
@@ -131,6 +132,7 @@ const App = () => {
     <Board
       fnMove={move}
     />
+    <Footer />
 
 
   </div>

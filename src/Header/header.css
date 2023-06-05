@@ -10,3 +10,15 @@ header {
     margin: 0.5em;
     font-size: 1.8em;
 }
+
+.image-container{
+    max-width: 100%;
+    height: auto;
+}
+
+.image-container img{
+   width: 2em;
+   height: fit-content;
+   filter: opacity(.5) drop-shadow(0 0 0 #545B41);  
+
+}

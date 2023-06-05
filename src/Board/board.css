@@ -9,18 +9,16 @@
 }
 
 .board2 {
-  border: 8px solid #8B966E;
-  border-radius: 2px;
+
 }
+  
 
 .board3 {
-  border: 8px solid #B0BB92;
-  border-radius: 5px;
+ 
 }
 
 .board4 {
-  border: 8px solid #545B41;
-  border-radius: 5px;
+  
 }
 
 .row {
@@ -34,13 +32,13 @@
 }
 
 .filled {
-  background-color: red;
+  background-color: #555C3C;
   width: 40px;
   height: 0px;
 }
 
 .red {
-  background-color: red;
+  background-color: #555C3C;
   animation: bend 1s infinite
 }
 

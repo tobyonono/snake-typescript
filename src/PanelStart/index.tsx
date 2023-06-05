@@ -1,4 +1,5 @@
 import {BsPlayFill} from 'react-icons/bs'
+import start from './start.png';
 import './panelStart.css'
 
 interface Props {
