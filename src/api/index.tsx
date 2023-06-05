@@ -1,11 +1,13 @@
 import { firebaseConfig } from './config';
 import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 import {
   getFirestore, collection, query,
   getDocs, doc, updateDoc, addDoc, orderBy, limit
 } from 'firebase/firestore';
 
 const app = initializeApp(firebaseConfig || null );
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const collectionName:string = 'snake-records'
 
@@ -27,6 +29,8 @@ export const getRecords = async () => {
     id:doc.id, 
     nickName: doc.data().nickName, 
     value:  doc.data().value, 
+    email: doc.data().email
+
   }))  
   return data;
 }

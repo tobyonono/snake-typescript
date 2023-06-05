@@ -19,6 +19,7 @@ const PanelPlayer = () => {
         newRec.id = res.id
         saveToStorage(newRec);
       })
+      console.log(newRec, 'testing record')
   }
 
   const registerRecord = () => {
@@ -49,6 +50,13 @@ const PanelPlayer = () => {
       return newS
     })
   }
+  const changeEmail = (e: FormEvent<HTMLInputElement>) => {
+    setSnake((oldS: Snake) => {
+      const newS: Snake = { ...oldS }
+      newS.maxScore.email = e.currentTarget.value
+      return newS
+    })
+  }
 
   return <div className='panelPlayer'>
     <span>Game Over
@@ -68,6 +76,18 @@ const PanelPlayer = () => {
           minLength={3}
           value={snake.maxScore.nickName}
           onChange={changeNickName}
+          autoFocus
+        />
+      </div>
+      <div className='input-label'>
+        <span>Your email:</span>
+        <input
+          id='myEmail'
+          type='text'
+          maxLength={30}
+          minLength={6}
+          value={snake.maxScore.email}
+          onChange={changeEmail}
           autoFocus
         />
       </div>

@@ -9,6 +9,7 @@ declare global {
     id:string
     value:number
     nickName:string
+    email:string
   }
 
   interface Axys  {
