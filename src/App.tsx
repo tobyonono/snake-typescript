@@ -130,7 +130,7 @@ const App = () => {
     <Board
       fnMove={move}
     />
-    <Footer/>
+    
 
   </div>
 
