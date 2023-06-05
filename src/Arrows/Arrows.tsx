@@ -7,6 +7,7 @@ interface Props {
   setAppAxys: (key:string) => void
 }
 
+
 const Arrows = ({setAppAxys}:Props) => {
 
   return <div className='arrows'>
