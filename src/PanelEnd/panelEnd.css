@@ -2,6 +2,7 @@
 .endPanel {
   position: absolute;
   margin: .5em;
+  padding: 4.5em;
   width: 480px;
   height: 215px;
   background-color: #414141;
