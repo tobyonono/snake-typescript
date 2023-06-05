@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Board from './Board'
-import {cols, rows, getNextFruit, speeds } from './const/consts'
+import { cols, rows, getNextFruit, speeds } from './const/consts'
 import ScoreItem from './ScoreItem'
 import { TbTrophy } from 'react-icons/tb'
-import {SnakeContext} from './SnakeContext/SnakeProvider'
+import { SnakeContext } from './SnakeContext/SnakeProvider'
 import { getNewAxys } from './utils/keyboardEvents'
-import Footer from './Footer/Footer'
+import Header from './Header/Header';
 import useSwipe from './utils/mySwipe'
 
 const App = () => {
-  const [axys, setAxys] =  useState<Axys>({row:0, col:1})
-  const {snake, setSnake} = useContext(SnakeContext)
+  const [axys, setAxys] = useState<Axys>({ row: 0, col: 1 })
+  const { snake, setSnake } = useContext(SnakeContext)
 
-  const swipeHandlers = useSwipe({ 
+  const swipeHandlers = useSwipe({
     onSwipedRight: () => setAppAxys('ArrowRight'),
     onSwipedLeft: () => setAppAxys('ArrowLeft'),
     onSwipedUp: () => setAppAxys('ArrowUp'),
@@ -31,23 +31,23 @@ const App = () => {
 
   useEffect(() => {
     window
-      .addEventListener('keydown', 
-      (key: KeyboardEvent) => setAppAxys(key.key)
-    );
+      .addEventListener('keydown',
+        (key: KeyboardEvent) => setAppAxys(key.key)
+      );
     // eslint-disable-next-line
   }, [])
-  
-  const setAppAxys = (key:string) => {
-    let newAxys:Axys = getNewAxys(key, axys) 
-    setAxys( oldAx => {
-      oldAx.row =  newAxys.row;
-      oldAx.col =  newAxys.col;
+
+  const setAppAxys = (key: string) => {
+    let newAxys: Axys = getNewAxys(key, axys)
+    setAxys(oldAx => {
+      oldAx.row = newAxys.row;
+      oldAx.col = newAxys.col;
       return oldAx;
-    });  
+    });
   }
 
   const pushSnake = () => {
-    setSnake((oldS:Snake) => {
+    setSnake((oldS: Snake) => {
       let newSnake: Snake;
 
       let nextCell: Coordinate = {
@@ -65,10 +65,10 @@ const App = () => {
         oldS.phase = 2;
 
         clearInterval(oldS.idTimer);
-        newSnake = {...oldS}
+        newSnake = { ...oldS }
         return newSnake
       }
-      
+
       let speedIndex = 0
 
       if (nextCell.col === oldS.fruit.col && nextCell.row === oldS.fruit.row) {
@@ -84,9 +84,9 @@ const App = () => {
           ...oldS,
           cells: [...oldS.cells.slice(1), nextCell],
         };
-      }     
-      
-      if (speedIndex>10) speedIndex = 10 //Speed limit
+      }
+
+      if (speedIndex > 10) speedIndex = 10 //Speed limit
       const id = setTimeout(() => pushSnake(), speeds[speedIndex])
       newSnake.idTimer = id
       return newSnake;
@@ -95,16 +95,16 @@ const App = () => {
 
   const move = () => {
 
-    setAxys( oldAx => {
+    setAxys(oldAx => {
       oldAx.row = 0
       oldAx.col = 1
       return oldAx;
-    });  
+    });
 
     const id = setTimeout(() => pushSnake(), speeds[0])
-      
-    setSnake((oldS:Snake) => {
-      return {...oldS, phase:1, idTimer:id};
+
+    setSnake((oldS: Snake) => {
+      return { ...oldS, phase: 1, idTimer: id };
     })
 
     return () => clearInterval(id);
@@ -112,6 +112,7 @@ const App = () => {
 
   return <div className='App' {...swipeHandlers}>
 
+    <Header />
     <div className='placar'>
       <ScoreItem
         description='Points:'
@@ -130,7 +131,7 @@ const App = () => {
     <Board
       fnMove={move}
     />
-    
+
 
   </div>
 
